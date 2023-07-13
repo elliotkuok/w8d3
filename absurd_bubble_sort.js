@@ -1,8 +1,8 @@
 const readline = require("readline");
 
 const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
 function askIfGreaterThan(el1, el2, callback) {
@@ -18,15 +18,16 @@ function askIfGreaterThan(el1, el2, callback) {
 function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
     if (i === arr.length - 1) {
         outerBubbleSortLoop(madeAnySwaps);
+        return;
     } else {
-        askIfGreaterThan(arr[i], arr[i + 1], callback = function(boolean) {
+        askIfGreaterThan(arr[i], arr[i + 1], function(boolean) {
             if (boolean) {
-                [arr[i], arr[i + 1]] = [[arr[i + 1], arr[i]]];
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
                 madeAnySwaps = true;
             }
-        });
-           
-        innerBubbleSortLoop(arr, i + 1, madeAnySwaps, outerBubbleSortLoop);
+
+            innerBubbleSortLoop(arr, i + 1, madeAnySwaps, outerBubbleSortLoop);
+        })
     }
 }
 
@@ -42,10 +43,10 @@ function absurdBubbleSort(arr, sortCompletionCallback) {
     outerBubbleSortLoop(true);
 }
 
-absurdBubbleSort([3, 2, 1], function(arr) {
-  console.log("Sorted array: " + JSON.stringify(arr));
-  reader.close();
-});
+absurdBubbleSort([3, -1, 5, 9], function(arr) {
+    console.log("Sorted array: " + JSON.stringify(arr));
+    reader.close();
+})
 
 // let callback = function(boolean) {
 //     if (boolean) {
